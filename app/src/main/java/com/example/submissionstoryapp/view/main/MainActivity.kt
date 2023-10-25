@@ -7,25 +7,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.viewModelScope
-import com.example.submissionstoryapp.R
 import com.example.submissionstoryapp.data.api.ApiConfig
-import com.example.submissionstoryapp.data.api.ApiService
 import com.example.submissionstoryapp.data.repo.StoryRepository
 import com.example.submissionstoryapp.data.response.ListStoryItem
-import com.example.submissionstoryapp.data.response.StoryResponse
 import com.example.submissionstoryapp.databinding.ActivityMainBinding
 import com.example.submissionstoryapp.view.ViewModelFactory
 import com.example.submissionstoryapp.view.addstory.AddStoryActivity
 import com.example.submissionstoryapp.view.detail.DetailActivity
-import com.example.submissionstoryapp.view.register.RegisterActivity
 import com.example.submissionstoryapp.view.welcome.WelcomeActivity
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), StoryClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -46,8 +38,6 @@ class MainActivity : AppCompatActivity(), StoryClickListener {
             if (!user.isLogin){
                 startActivity(Intent(this, WelcomeActivity::class.java))
                 finish()
-            }else{
-                val token = user.token
             }
         }
         setupView()
@@ -93,12 +83,11 @@ class MainActivity : AppCompatActivity(), StoryClickListener {
                             onSuccess = { storyList ->
                                 updateStoryList(storyList)
                             },
-                            onError = { errorMessage ->
-                                // Handle error, e.g., show a Toast or Snackbar
+                            onError = {
                             }
                         )
                     } catch (e: Exception) {
-                        // Handle network error
+                        Log.d("Error", e.message.toString())
                     }
                 }
             }

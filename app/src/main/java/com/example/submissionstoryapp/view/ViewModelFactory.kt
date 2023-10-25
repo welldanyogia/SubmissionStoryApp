@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.submissionstoryapp.data.repo.UserRepository
 import com.example.submissionstoryapp.data.di.Injection
 import com.example.submissionstoryapp.data.repo.StoryRepository
-import com.example.submissionstoryapp.data.repo.UploadRepository
-import com.example.submissionstoryapp.view.addstory.AddStoryViewModel
 import com.example.submissionstoryapp.view.detail.DetailViewModel
 import com.example.submissionstoryapp.view.login.LoginViewModel
 import com.example.submissionstoryapp.view.main.MainViewModel
 
-class ViewModelFactory(private val repository: UserRepository, private val storyRepository: StoryRepository,private val uploadRepository: UploadRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val repository: UserRepository, private val storyRepository: StoryRepository) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -26,9 +24,6 @@ class ViewModelFactory(private val repository: UserRepository, private val story
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(storyRepository) as T
             }
-            modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
-                AddStoryViewModel(uploadRepository) as T
-            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -40,7 +35,7 @@ class ViewModelFactory(private val repository: UserRepository, private val story
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context),Injection.provideStoryRepository(),Injection.provideUploadRepository())
+                    INSTANCE = ViewModelFactory(Injection.provideRepository(context),Injection.provideStoryRepository())
                 }
             }
             return INSTANCE as ViewModelFactory

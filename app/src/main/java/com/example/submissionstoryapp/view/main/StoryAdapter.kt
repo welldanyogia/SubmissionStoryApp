@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.submissionstoryapp.data.response.ListStoryItem
-import com.example.submissionstoryapp.data.response.StoryResponse
 import com.example.submissionstoryapp.databinding.EachItemBinding
 import com.squareup.picasso.Picasso
 

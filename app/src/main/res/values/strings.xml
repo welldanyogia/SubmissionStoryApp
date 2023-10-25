@@ -16,4 +16,5 @@
     <string name="camera">Camera</string>
     <string name="upload">Upload</string>
     <string name="empty_image_warning">Gagal</string>
+    <string name="description">Description</string>
 </resources>

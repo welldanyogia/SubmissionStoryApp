@@ -70,12 +70,13 @@
         android:id="@+id/editTextText"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:autofillHints="Description"
         android:ems="10"
+        android:hint="@string/description"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/cameraButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="Description"
         tools:ignore="LabelFor" />
 
 

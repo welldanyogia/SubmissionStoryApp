@@ -14,7 +14,6 @@ import android.view.WindowManager
 import androidx.annotation.RequiresExtension
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
-import com.example.submissionstoryapp.data.repo.UserRepository
 import com.example.submissionstoryapp.data.api.ApiConfig
 import com.example.submissionstoryapp.data.pref.UserModel
 import com.example.submissionstoryapp.data.response.LoginResponse
@@ -28,7 +27,6 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
-    private lateinit var userRepository: UserRepository
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +35,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModelFactory = ViewModelFactory.getInstance(this)
-//        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         viewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
-//        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         setupView()
         setupAction()
     }
@@ -113,14 +109,6 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }else{
                             progressBar.visibility = View.GONE
-//                            AlertDialog.Builder(this@LoginActivity).apply {
-//                                setTitle("Oops!")
-//                                setMessage("Login failed")
-//                                setPositiveButton("OK") { _, _ -> }
-//                                create()
-//                                show()
-//                            }
-//                            Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
                             AlertDialog.Builder(this@LoginActivity).apply {
                                 setTitle("Ooops!")
                                 setMessage("Login failed")
